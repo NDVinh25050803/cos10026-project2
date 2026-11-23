@@ -1,28 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Job descriptions page. Author: Nguyen Dang Vinh (Group DVMT). References: see Sources section -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Front-end developer, full-stack developer and UI/UX designer jobs at SwinEduTech, an EdTech company building accessible online learning tools.">
-  <meta name="keywords" content="SwinEduTech, jobs, front-end developer, full-stack developer, UI/UX designer, EdTech, accessibility, Melbourne">
-  <meta name="author" content="Nguyen Dang Vinh">
-  <meta name="theme-color" content="#1c2551">
-  <title>SwinEduTech - Job Descriptions</title>
-
-  <!-- Favicon -->
-  <link rel="icon" href="images/logo.png" type="image/png">
-  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-
-  <!-- Fonts: Atkinson Hyperlegible (Braille Institute) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@700&amp;family=Atkinson+Hyperlegible+Next:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/style.css">
-
-  <!-- Embedded CSS -->
-  <style>
+<?php
+// Job descriptions page. Author: Nguyen Dang Vinh (Group DVMT). References: see Sources section
+$page_title = 'Job Descriptions';
+$page_description = 'Front-end developer, full-stack developer and UI/UX designer jobs at SwinEduTech, an EdTech company building accessible online learning tools.';
+$page_keywords = 'SwinEduTech, jobs, front-end developer, full-stack developer, UI/UX designer, EdTech, accessibility, Melbourne';
+$page_author = 'Nguyen Dang Vinh';
+$body_id = 'jobs-page';
+$page_style = <<<CSS
     .job-meta .ref-no {
       display: inline-block;
       margin-top: 2px;
@@ -34,29 +17,9 @@
       letter-spacing: 1px;
       transform: rotate(-2deg);
     }
-  </style>
-</head>
-
-<body id="jobs-page">
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-
-  <!-- Header section -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="index.php" class="brand">
-        <img src="images/logo.png" alt="" width="40" height="40">
-        <span translate="no">SwinEduTech</span>
-      </a>
-      <nav class="main-nav" aria-label="Main">
-        <ul>
-          <li><a href="index.php">Home</a></li>
-          <li><a href="jobs.html" aria-current="page">Job Descriptions</a></li>
-          <li><a href="apply.html">Apply Now</a></li>
-          <li><a href="about.html">About Us</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+CSS;
+include 'header.inc';
+?>
 
   <main id="main-content">
     <h1>Open positions</h1>
@@ -299,16 +262,5 @@
   </main>
 
   <!-- Footer section -->
-  <footer class="site-footer">
-    <div class="acknowledgement">
-      <p>We respectfully acknowledge the Wurundjeri People of the Kulin Nation, the Traditional Owners of the land where our Melbourne office and Swinburne’s campuses stand, and pay our respects to their Elders past, present and emerging. <a href="about.html#country-heading">Why we include this</a></p>
-    </div>
-    <p>&copy; 2026 SwinEduTech. Group DVMT - COS10026.</p>
-    <p class="contact">Contact: <a href="mailto:SWD00450@swin.edu.au">SWD00450@swin.edu.au</a></p>
-    <ul>
-      <li><a href="https://github.com/NDVinh25050803/cos10026-project2">GitHub Repository</a></li>
-      <li><a href="https://cos10026group9.atlassian.net/jira/software/projects/HCM/boards/5">Jira project board</a></li>
-    </ul>
-  </footer>
-</body>
-</html>
+
+<?php include 'footer.inc'; ?>
