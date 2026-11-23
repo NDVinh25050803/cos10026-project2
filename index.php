@@ -1,5 +1,5 @@
 <?php
-// Home page. References: MDN Web Docs, W3C WAI
+// Home page. Author: Nguyen Truong Minh Thuy. References: MDN Web Docs, W3C WAI
 $page_title = 'Home';
 $page_description = 'SwinEduTech builds digital learning tools and inclusive online education platforms. Search our open web developer and designer roles.';
 $page_keywords = 'SwinEduTech, EdTech, careers, web developer, designer, accessible learning';

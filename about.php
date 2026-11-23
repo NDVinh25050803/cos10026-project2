@@ -1,5 +1,5 @@
 <?php
-// About page. References: MDN Web Docs, W3C WAI
+// About page. Author: Nguyen Dang Vinh. References: MDN Web Docs, W3C WAI
 $page_title = 'About Us';
 $page_description = 'Meet group DVMT, the two Swinburne students who built the SwinEduTech recruitment website for COS10026 Web Technology Project.';
 $page_keywords = 'SwinEduTech, DVMT, about, team, COS10026, Swinburne';

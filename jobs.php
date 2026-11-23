@@ -1,5 +1,5 @@
 <?php
-// Job descriptions page. References: see Sources section
+// Job descriptions page. Author: Nguyen Dang Vinh. References: see Sources section
 $page_title = 'Job Descriptions';
 $page_description = 'Front-end developer, full-stack developer and UI/UX designer jobs at SwinEduTech, an EdTech company building accessible online learning tools.';
 $page_keywords = 'SwinEduTech, jobs, front-end developer, full-stack developer, UI/UX designer, EdTech, accessibility, Melbourne';
