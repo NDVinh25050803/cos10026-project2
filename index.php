@@ -1,56 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Home page. Author: Nguyen Truong Minh Thuy (Group DVMT). References: MDN Web Docs, W3C WAI -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="SwinEduTech builds digital learning tools and inclusive online education platforms. Search our open web developer and designer roles.">
-  <meta name="keywords" content="SwinEduTech, EdTech, careers, web developer, designer, accessible learning">
-  <meta name="author" content="Nguyen Truong Minh Thuy">
-  <meta name="theme-color" content="#1c2551">
-  <title>SwinEduTech - Home</title>
-
-  <!-- Favicon -->
-  <link rel="icon" href="images/logo.png" type="image/png">
-  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-
-  <!-- Fonts: Atkinson Hyperlegible (Braille Institute) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@700&amp;family=Atkinson+Hyperlegible+Next:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/style.css">
-
-  <!-- Embedded CSS -->
-  <style>
+<?php
+// Home page. Author: Nguyen Truong Minh Thuy (Group DVMT). References: MDN Web Docs, W3C WAI
+$page_title = 'Home';
+$page_description = 'SwinEduTech builds digital learning tools and inclusive online education platforms. Search our open web developer and designer roles.';
+$page_keywords = 'SwinEduTech, EdTech, careers, web developer, designer, accessible learning';
+$page_author = 'Nguyen Truong Minh Thuy';
+$body_id = 'index-page';
+$page_style = <<<CSS
     .slogan {
       margin: var(--space-md) 0 0;
       font-size: var(--text-lg);
       font-weight: 700;
       color: var(--ink-soft);
     }
-  </style>
-</head>
-<body id="index-page">
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-
-  <!-- Header section -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="index.php" class="brand">
-        <img src="images/logo.png" alt="" width="40" height="40">
-        <span translate="no">SwinEduTech</span>
-      </a>
-      <nav class="main-nav" aria-label="Main">
-        <ul>
-          <li><a href="index.php" aria-current="page">Home</a></li>
-          <li><a href="jobs.html">Job Descriptions</a></li>
-          <li><a href="apply.html">Apply Now</a></li>
-          <li><a href="about.html">About Us</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+CSS;
+include 'header.inc';
+?>
 
   <main id="main-content">
     <h1>Welcome to SwinEduTech</h1>
@@ -130,16 +94,5 @@
   </main>
 
   <!-- Footer section -->
-  <footer class="site-footer">
-    <div class="acknowledgement">
-      <p>We respectfully acknowledge the Wurundjeri People of the Kulin Nation, the Traditional Owners of the land where our Melbourne office and Swinburne’s campuses stand, and pay our respects to their Elders past, present and emerging. <a href="about.html#country-heading">Why we include this</a></p>
-    </div>
-    <p>&copy; 2026 SwinEduTech. Group DVMT - COS10026.</p>
-    <p class="contact">Contact: <a href="mailto:SWD00450@swin.edu.au">SWD00450@swin.edu.au</a></p>
-    <ul>
-      <li><a href="https://github.com/NDVinh25050803/cos10026-project2">GitHub Repository</a></li>
-      <li><a href="https://cos10026group9.atlassian.net/jira/software/projects/HCM/boards/5">Jira project board</a></li>
-    </ul>
-  </footer>
-</body>
-</html>
+
+<?php include 'footer.inc'; ?>
