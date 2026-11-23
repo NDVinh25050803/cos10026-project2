@@ -1,0 +1,4 @@
+# Block direct access to include files, SQL dumps and docs. Author: Nguyen Dang Vinh.
+<FilesMatch "\.(inc|sql|md)$">
+  Require all denied
+</FilesMatch>

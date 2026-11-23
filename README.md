@@ -10,6 +10,9 @@ project2/
 ├── header.inc, nav.inc, footer.inc   shared page parts
 ├── settings.php     database settings
 ├── db_connect.php   opens the database connection
+├── sql/             tables and seed data, one file per table group
+├── docs/            database design (ERD, data dictionary)
+├── .htaccess        stops the browser from opening .inc, .sql and .md files
 ├── images/          page images, logo, icons
 └── styles/
     ├── style.css    all the CSS
@@ -36,7 +39,15 @@ Create it once in phpMyAdmin (`http://localhost/phpmyadmin`), or from the comman
 C:\xampp\mysql\bin\mysql.exe -u root -e "CREATE DATABASE IF NOT EXISTS hcm_thursdaymorning_09 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 ```
 
-When the `.sql` file is added, select the database in phpMyAdmin and use **Import** to load it.
+Then load the tables. In phpMyAdmin, select the database and **Import** each file in `sql/`: `eoi.sql`, `jobs.sql`, `users.sql`, `about.sql`. Or run this in **Command Prompt** (not PowerShell) from the project folder:
+
+```
+for %f in (eoi jobs users about) do C:\xampp\mysql\bin\mysql.exe -u root --default-character-set=utf8mb4 hcm_thursdaymorning_09 < sql\%f.sql
+```
+
+Each file drops and recreates its own tables, so running it again resets that data. The HR login is `admin` / `admin`.
+
+Tables and columns are described in [docs/database.md](docs/database.md).
 
 ## How we work
 
