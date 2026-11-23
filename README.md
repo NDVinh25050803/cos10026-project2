@@ -35,6 +35,21 @@ C:\xampp\mysql\bin\mysql.exe -u root -e "CREATE DATABASE IF NOT EXISTS hcm_thurs
 
 When the `.sql` file is added, select the database in phpMyAdmin and use **Import** to load it.
 
+## How we work
+
+**Branches and commits.** One branch per Jira card, named after the card key, e.g. `HCM-15-header-inc`. Commit messages start with the key too: `HCM-15: add header.inc`.
+
+**Review.** Nobody pushes straight to `main`. Open a pull request and the other person reviews it before it gets merged. GitHub enforces this on `main`.
+
+**Jira.** Move your card as you go: To Do → In Progress → In Review (PR is open) → Done (PR is merged).
+
+**Definition of Done.** A card is done when:
+
+- the page works on `http://localhost/project2/`
+- the other member has reviewed the PR
+- the PR is merged into `main`
+- the Jira card is in Done
+
 ## Team
 
 - Nguyen Dang Vinh
