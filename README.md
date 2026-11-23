@@ -6,7 +6,7 @@ Our COS10026 website. It starts from the Part 1 pages.
 
 ```
 project2/
-├── index.html, about.html, jobs.html, apply.html
+├── index.php, about.html, jobs.html, apply.html
 ├── images/          page images, logo, icons
 └── styles/
     ├── style.css    all the CSS
@@ -15,17 +15,25 @@ project2/
 
 ## Run the site
 
-1. Clone the repo: `git clone <repo-url>`
-2. Open `index.html` in a browser. The Part 1 pages are plain HTML, so no server is needed.
-3. Once we add PHP pages, put the folder in your web server root (for XAMPP, `htdocs/`), start Apache and go to `http://localhost/project2/`.
+You need XAMPP with PHP 8 and MySQL/MariaDB.
 
-## Import the database
+1. Clone the repo into `C:\xampp\htdocs\project2`. If you keep it somewhere else, link it in instead (PowerShell):
+   `New-Item -ItemType Junction -Path C:\xampp\htdocs\project2 -Target <your-clone-folder>`
+2. Start Apache and MySQL in the XAMPP Control Panel.
+3. Go to `http://localhost/project2/index.php`.
 
-There is no database yet. We will fill this in when the `.sql` file is added.
+## Database
 
-1. Start MySQL (XAMPP) and open phpMyAdmin.
-2. Create an empty database and use **Import** to load the `.sql` file from this repo.
-3. Check that the DB user and password in the PHP settings file match your local MySQL.
+- User: `root`, empty password (the XAMPP default)
+- Database: `hcm_thursdaymorning_09`
+
+Create it once in phpMyAdmin (`http://localhost/phpmyadmin`), or from the command line:
+
+```
+C:\xampp\mysql\bin\mysql.exe -u root -e "CREATE DATABASE IF NOT EXISTS hcm_thursdaymorning_09 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+```
+
+When the `.sql` file is added, select the database in phpMyAdmin and use **Import** to load it.
 
 ## Team
 
