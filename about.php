@@ -1,11 +1,11 @@
 <?php
-// About page. Author: Nguyen Dang Vinh (Group DVMT). References: MDN Web Docs, W3C WAI
+// About page. References: MDN Web Docs, W3C WAI
 $page_title = 'About Us';
 $page_description = 'Meet group DVMT, the two Swinburne students who built the SwinEduTech recruitment website for COS10026 Web Technology Project.';
 $page_keywords = 'SwinEduTech, DVMT, about, team, COS10026, Swinburne';
 $page_author = 'Nguyen Dang Vinh';
 $body_id = 'about-page';
-$page_style = <<<CSS
+$page_style = <<<'CSS'
     .members dd ul {
       padding-left: var(--space-md);
       margin: var(--space-sm) 0 0;

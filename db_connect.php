@@ -1,5 +1,5 @@
 <?php
-// Opens $conn to the database. Author: Nguyen Dang Vinh.
+// Opens $conn to the database.
 require_once 'settings.php';
 
 try {

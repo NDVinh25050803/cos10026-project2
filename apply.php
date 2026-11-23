@@ -1,11 +1,11 @@
 <?php
-// Application page. Author: Nguyen Truong Minh Thuy (Group DVMT). References: MDN Web Docs, W3C WAI
+// Application page. References: MDN Web Docs, W3C WAI
 $page_title = 'Apply Now';
 $page_description = 'Apply for a web developer or designer role at SwinEduTech. All fields are required except other skills.';
 $page_keywords = 'SwinEduTech, apply, job application, web developer, designer';
 $page_author = 'Nguyen Truong Minh Thuy';
 $body_id = 'apply-page';
-$page_style = <<<CSS
+$page_style = <<<'CSS'
     .privacy-note {
       margin: 0 0 var(--space-lg);
       padding: var(--space-md) var(--space-lg);

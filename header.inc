@@ -1,22 +1,22 @@
 <?php
 /*
- * Shared <head> and site header. Author: Nguyen Dang Vinh.
+ * Shared <head> and site header.
  * Set these before including this file:
  *   $page_title, $page_description, $page_keywords, $page_author, $body_id
  *   $page_style (optional) - extra CSS for this page only
  */
-$e = fn($s) => htmlspecialchars($s ?? '', ENT_QUOTES, 'UTF-8');
+$esc = fn($s) => htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="<?= $e($page_description) ?>">
-  <meta name="keywords" content="<?= $e($page_keywords) ?>">
-  <meta name="author" content="<?= $e($page_author) ?>">
+  <meta name="description" content="<?= $esc($page_description ?? '') ?>">
+  <meta name="keywords" content="<?= $esc($page_keywords ?? '') ?>">
+  <meta name="author" content="<?= $esc($page_author ?? '') ?>">
   <meta name="theme-color" content="#1c2551">
-  <title>SwinEduTech - <?= $e($page_title) ?></title>
+  <title>SwinEduTech - <?= $esc($page_title ?? '') ?></title>
 
   <!-- Favicon -->
   <link rel="icon" href="images/logo.png" type="image/png">
@@ -35,7 +35,7 @@ $e = fn($s) => htmlspecialchars($s ?? '', ENT_QUOTES, 'UTF-8');
   </style>
 <?php endif; ?>
 </head>
-<body id="<?= $e($body_id) ?>">
+<body id="<?= $esc($body_id ?? '') ?>">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header">

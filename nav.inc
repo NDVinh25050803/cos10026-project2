@@ -1,5 +1,5 @@
 <?php
-/* Main menu, shared by every page. Author: Nguyen Dang Vinh.
+/* Main menu, shared by every page.
  * The link for the page you are on gets aria-current="page". */
 $current_page = basename($_SERVER['PHP_SELF']);
 $nav_links = [
