@@ -3,7 +3,6 @@
 $page_title = 'Home';
 $page_description = 'SwinEduTech builds digital learning tools and inclusive online education platforms. Search our open web developer and designer roles.';
 $page_keywords = 'SwinEduTech, EdTech, careers, web developer, designer, accessible learning';
-$page_author = 'Nguyen Truong Minh Thuy';
 $body_id = 'index-page';
 $page_style = <<<'CSS'
     .slogan {

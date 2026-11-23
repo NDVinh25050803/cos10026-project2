@@ -2,7 +2,7 @@
 /*
  * Shared <head> and site header.
  * Set these before including this file:
- *   $page_title, $page_description, $page_keywords, $page_author, $body_id
+ *   $page_title, $page_description, $page_keywords, $body_id
  *   $page_style (optional) - extra CSS for this page only
  */
 $esc = fn($s) => htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
@@ -14,7 +14,6 @@ $esc = fn($s) => htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="<?= $esc($page_description ?? '') ?>">
   <meta name="keywords" content="<?= $esc($page_keywords ?? '') ?>">
-  <meta name="author" content="<?= $esc($page_author ?? '') ?>">
   <meta name="theme-color" content="#1c2551">
   <title>SwinEduTech - <?= $esc($page_title ?? '') ?></title>
 

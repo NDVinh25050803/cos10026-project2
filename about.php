@@ -1,9 +1,8 @@
 <?php
 // About page. References: MDN Web Docs, W3C WAI
 $page_title = 'About Us';
-$page_description = 'Meet group DVMT, the two Swinburne students who built the SwinEduTech recruitment website for COS10026 Web Technology Project.';
-$page_keywords = 'SwinEduTech, DVMT, about, team, COS10026, Swinburne';
-$page_author = 'Nguyen Dang Vinh';
+$page_description = 'Meet the two Swinburne students who built the SwinEduTech recruitment website for COS10026 Web Technology Project.';
+$page_keywords = 'SwinEduTech, about, team, COS10026, Swinburne';
 $body_id = 'about-page';
 $page_style = <<<'CSS'
     .members dd ul {

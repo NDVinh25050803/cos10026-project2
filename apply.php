@@ -3,7 +3,6 @@
 $page_title = 'Apply Now';
 $page_description = 'Apply for a web developer or designer role at SwinEduTech. All fields are required except other skills.';
 $page_keywords = 'SwinEduTech, apply, job application, web developer, designer';
-$page_author = 'Nguyen Truong Minh Thuy';
 $body_id = 'apply-page';
 $page_style = <<<'CSS'
     .privacy-note {
