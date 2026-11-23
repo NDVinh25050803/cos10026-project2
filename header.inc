@@ -1,6 +1,6 @@
 <?php
 /*
- * Shared <head> and site header.
+ * Shared <head> and site header. Author: Nguyen Dang Vinh.
  * Set these before including this file:
  *   $page_title, $page_description, $page_keywords, $page_author, $body_id
  *   $page_style (optional) - extra CSS for this page only

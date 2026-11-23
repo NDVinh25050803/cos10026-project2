@@ -1,5 +1,5 @@
 <?php
-// Application page. References: MDN Web Docs, W3C WAI
+// Application page. Author: Nguyen Truong Minh Thuy. References: MDN Web Docs, W3C WAI
 $page_title = 'Apply Now';
 $page_description = 'Apply for a web developer or designer role at SwinEduTech. All fields are required except other skills.';
 $page_keywords = 'SwinEduTech, apply, job application, web developer, designer';

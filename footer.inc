@@ -1,4 +1,4 @@
-<?php /* Shared footer. */ ?>
+<?php /* Shared footer. Author: Nguyen Dang Vinh. */ ?>
   <footer class="site-footer">
     <div class="acknowledgement">
       <p>We respectfully acknowledge the Wurundjeri People of the Kulin Nation, the Traditional Owners of the land where our Melbourne office and Swinburne’s campuses stand, and pay our respects to their Elders past, present and emerging. <a href="about.php#country-heading">Why we include this</a></p>
