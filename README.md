@@ -1,4 +1,4 @@
-# COS10026 Project 2 - SwinEduTech (Group DVMT)
+# COS10026 Project 2 - SwinEduTech (Group HCM_ThursdayMorning_09)
 
 Our COS10026 website. It starts from the Part 1 pages.
 
@@ -6,7 +6,10 @@ Our COS10026 website. It starts from the Part 1 pages.
 
 ```
 project2/
-├── index.php, about.html, jobs.html, apply.html
+├── index.php, jobs.php, apply.php, about.php
+├── header.inc, nav.inc, footer.inc   shared page parts
+├── settings.php     database settings
+├── db_connect.php   opens the database connection
 ├── images/          page images, logo, icons
 └── styles/
     ├── style.css    all the CSS

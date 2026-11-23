@@ -1,5 +1,5 @@
 <?php
-// Database settings. Only this file holds them. Author: Nguyen Dang Vinh.
+// Database settings. Only this file holds them.
 $host = "localhost";
 $user = "root";
 $pwd = "";
