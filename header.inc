@@ -35,7 +35,7 @@ $esc = fn($s) => htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
   </style>
 <?php endif; ?>
 </head>
-<body id="<?= $esc($body_id ?? '') ?>">
+<body<?= empty($body_id) ? '' : ' id="' . $esc($body_id) . '"' ?>>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header">
