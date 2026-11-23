@@ -20,7 +20,7 @@ include 'header.inc';
 
   <main id="main-content">
     <h1>Job application form</h1>
-    <p>Fields marked with <span class="req">*</span> are required. Find the reference number on the <a href="jobs.html">Job Descriptions</a> page.</p>
+    <p>Fields marked with <span class="req">*</span> are required. Find the reference number on the <a href="jobs.php">Job Descriptions</a> page.</p>
 
     <div class="apply-form-container">
       <!-- Application form -->

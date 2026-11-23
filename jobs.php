@@ -104,7 +104,7 @@ include 'header.inc';
         </div>
       </section>
 
-      <a class="btn" href="apply.html">Apply now (reference FE001)</a>
+      <a class="btn" href="apply.php">Apply now (reference FE001)</a>
     </section>
 
     <!-- Job 2: Full-Stack Developer -->
@@ -170,7 +170,7 @@ include 'header.inc';
         </div>
       </section>
 
-      <a class="btn" href="apply.html">Apply now (reference FS002)</a>
+      <a class="btn" href="apply.php">Apply now (reference FS002)</a>
     </section>
 
     <!-- Job 3: UI/UX Designer -->
@@ -237,7 +237,7 @@ include 'header.inc';
         </div>
       </section>
 
-      <a class="btn" href="apply.html">Apply now (reference UX003)</a>
+      <a class="btn" href="apply.php">Apply now (reference UX003)</a>
     </section>
 
     <!-- Inclusive employment -->

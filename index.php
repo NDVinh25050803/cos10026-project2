@@ -25,7 +25,7 @@ include 'header.inc';
       <div>
         <h2 id="about-heading">Digital education solutions and careers</h2>
         <p>We are a technology company that builds digital learning tools and inclusive online education platforms for schools and TAFEs across Australia. We are looking for web developers and designers to help every learner, including people who use screen readers, keyboards or slow internet.</p>
-        <a class="btn" href="jobs.html">See open positions</a>
+        <a class="btn" href="jobs.php">See open positions</a>
       </div>
       <img src="images/hero.svg" alt="A laptop showing a SwinEduTech video lesson with captions, next to a keyboard Tab key, a text size control and an accessibility symbol" width="960" height="600">
     </section>
@@ -33,7 +33,7 @@ include 'header.inc';
     <!-- Search box -->
     <section class="search-container" aria-labelledby="search-heading">
       <h2 id="search-heading">Quick job search</h2>
-      <form action="jobs.html" method="get" role="search">
+      <form action="jobs.php" method="get" role="search">
         <label for="keyword">Keyword</label>
         <p class="hint" id="search-hint">Type a job title, then press Search to see all job descriptions.</p>
         <div class="search-row">
@@ -65,18 +65,18 @@ include 'header.inc';
           <tbody>
             <tr>
               <th scope="row" rowspan="2">Engineering</th>
-              <td><a href="jobs.html#fe001">Front-End Developer</a></td>
+              <td><a href="jobs.php#fe001">Front-End Developer</a></td>
               <td>Melbourne, hybrid</td>
               <td>Full-time</td>
             </tr>
             <tr>
-              <td><a href="jobs.html#fs002">Full-Stack Developer</a></td>
+              <td><a href="jobs.php#fs002">Full-Stack Developer</a></td>
               <td>Remote, Australia</td>
               <td>Full-time</td>
             </tr>
             <tr>
               <th scope="row">Design</th>
-              <td><a href="jobs.html#ux003">UI/UX Designer</a></td>
+              <td><a href="jobs.php#ux003">UI/UX Designer</a></td>
               <td>Melbourne, hybrid</td>
               <td>Part-time</td>
             </tr>
