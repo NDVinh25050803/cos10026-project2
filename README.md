@@ -51,17 +51,17 @@ Tables and columns are described in [docs/database.md](docs/database.md).
 
 ## How we work
 
-**Branches and commits.** One branch per Jira card, named after the card key, e.g. `HCM-15-header-inc`. Commit messages start with the key too: `HCM-15: add header.inc`.
+**Commits.** Push straight to `main`, no branches or pull requests. Run `git pull` before you start and again before you push. Commit messages start with the Jira key, e.g. `HCM-34: validate the apply form`.
 
-**Review.** Nobody pushes straight to `main`. Open a pull request and the other person reviews it before it gets merged. GitHub enforces this on `main`.
+**Review.** When you finish a card, tell Vinh. Vinh reviews the code on `main` and fixes anything that needs it.
 
-**Jira.** Move your card as you go: To Do → In Progress → In Review (PR is open) → Done (PR is merged).
+**Jira.** Move your card as you go: To Do → In Progress → In Review (pushed, waiting for Vinh) → Done (Vinh has reviewed it).
 
 **Definition of Done.** A card is done when:
 
 - the page works on `http://localhost/project2/`
-- the other member has reviewed the PR
-- the PR is merged into `main`
+- the code is pushed to `main`
+- Vinh has reviewed it
 - the Jira card is in Done
 
 ## Team
