@@ -204,52 +204,56 @@ $email          = escape_html($email_raw);
 $phone          = escape_html($phone_raw);
 $other_skills   = escape_html($other_skills_raw);
 
-$skill1 = in_array('html_css', $selected_skills, true) ? 'HTML5 and CSS3' : '';
-$skill2 = in_array('javascript', $selected_skills, true) ? 'JavaScript' : '';
-$skill3 = in_array('ui_ux', $selected_skills, true) ? 'UI/UX design' : '';
-$skill4 = in_array('python', $selected_skills, true) ? 'Python' : '';
+$skill_html_css   = in_array('html_css', $selected_skills, true) ? 1 : 0;
+$skill_javascript = in_array('javascript', $selected_skills, true) ? 1 : 0;
+$skill_ui_ux      = in_array('ui_ux', $selected_skills, true) ? 1 : 0;
+$skill_python     = in_array('python', $selected_skills, true) ? 1 : 0;
 
 $eoi_number = null;
 
 if (empty($errors)) {
     $create_sql = "CREATE TABLE IF NOT EXISTS eoi (
-        EOInumber INT AUTO_INCREMENT PRIMARY KEY,
+        EOInumber INT UNSIGNED NOT NULL AUTO_INCREMENT,
         job_ref CHAR(5) NOT NULL,
         first_name VARCHAR(20) NOT NULL,
         last_name VARCHAR(20) NOT NULL,
         dob DATE NOT NULL,
-        gender VARCHAR(20) NOT NULL,
-        street_address VARCHAR(40) NOT NULL,
-        suburb VARCHAR(40) NOT NULL,
-        state VARCHAR(10) NOT NULL,
+        gender ENUM('female','male','other','not_say') NOT NULL,
+        street_address VARCHAR(255) NOT NULL,
+        suburb VARCHAR(255) NOT NULL,
+        state ENUM('VIC','NSW','QLD','NT','WA','SA','TAS','ACT') NOT NULL,
         postcode CHAR(4) NOT NULL,
-        email VARCHAR(100) NOT NULL,
-        phone VARCHAR(15) NOT NULL,
-        skill1 VARCHAR(30) DEFAULT '',
-        skill2 VARCHAR(30) DEFAULT '',
-        skill3 VARCHAR(30) DEFAULT '',
-        skill4 VARCHAR(30) DEFAULT '',
-        other_skills TEXT,
-        status ENUM('New', 'Current', 'Final') NOT NULL DEFAULT 'New',
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+        email VARCHAR(255) NOT NULL,
+        phone VARCHAR(12) NOT NULL,
+        skill_html_css TINYINT(1) NOT NULL DEFAULT 0,
+        skill_javascript TINYINT(1) NOT NULL DEFAULT 0,
+        skill_ui_ux TINYINT(1) NOT NULL DEFAULT 0,
+        skill_python TINYINT(1) NOT NULL DEFAULT 0,
+        other_skills TEXT NULL,
+        status ENUM('New','Current','Final') NOT NULL DEFAULT 'New',
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (EOInumber),
+        KEY idx_eoi_job_ref (job_ref),
+        KEY idx_eoi_name (last_name, first_name)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
 
     if (!mysqli_query($conn, $create_sql)) {
-        $errors[] = 'Could not prepare EOI table: ' . htmlspecialchars(mysqli_error($conn));
+        $errors[] = 'Could not prepare EOI table: ' . escape_html(mysqli_error($conn), false);
     } else {
         $insert_sql = "INSERT INTO eoi (
             job_ref, first_name, last_name, dob, gender,
             street_address, suburb, state, postcode,
-            email, phone, skill1, skill2, skill3, skill4, other_skills, status
+            email, phone, skill_html_css, skill_javascript,
+            skill_ui_ux, skill_python, other_skills, status
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'New')";
 
         $stmt = mysqli_prepare($conn, $insert_sql);
         if (!$stmt) {
-            $errors[] = 'Database statement error: ' . htmlspecialchars(mysqli_error($conn));
+            $errors[] = 'Database statement error: ' . escape_html(mysqli_error($conn), false);
         } else {
             mysqli_stmt_bind_param(
                 $stmt,
-                'ssssssssssssssss',
+                'sssssssssssiiiis',
                 $job_ref,
                 $first_name,
                 $last_name,
@@ -261,17 +265,17 @@ if (empty($errors)) {
                 $postcode,
                 $email,
                 $phone,
-                $skill1,
-                $skill2,
-                $skill3,
-                $skill4,
+                $skill_html_css,
+                $skill_javascript,
+                $skill_ui_ux,
+                $skill_python,
                 $other_skills
             );
 
             if (mysqli_stmt_execute($stmt)) {
                 $eoi_number = mysqli_insert_id($conn);
             } else {
-                $errors[] = 'Failed to save application: ' . htmlspecialchars(mysqli_stmt_error($stmt));
+                $errors[] = 'Failed to save application: ' . escape_html(mysqli_stmt_error($stmt), false);
             }
             mysqli_stmt_close($stmt);
         }
