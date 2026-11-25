@@ -33,9 +33,9 @@ include 'header.inc';
     <!-- Search box -->
     <section class="search-container" aria-labelledby="search-heading">
       <h2 id="search-heading">Quick job search</h2>
-      <form action="jobs.php" method="get" role="search">
+      <form action="search.php" method="get" role="search">
         <label for="keyword">Keyword</label>
-        <p class="hint" id="search-hint">Type a job title, then press Search to see all job descriptions.</p>
+        <p class="hint" id="search-hint">Type a job title or skill, then press Search.</p>
         <div class="search-row">
           <input type="search" id="keyword" name="keyword" placeholder="e.g. designer" list="search-suggestions" aria-describedby="search-hint">
           <button type="submit" class="btn">Search</button>

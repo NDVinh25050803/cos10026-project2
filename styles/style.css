@@ -79,7 +79,8 @@ h1 {
   font-weight: 800;
 }
 
-h1 + p {
+h1 + p,
+h1 + section {
   margin-top: var(--space-lg);
 }
 
