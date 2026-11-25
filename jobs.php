@@ -18,227 +18,102 @@ $page_style = <<<'CSS'
       transform: rotate(-2deg);
     }
 CSS;
+require_once 'db_connect.php';
+
+function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
+
+// Column => label for the job-meta list (Reference is printed separately).
+$meta = ['team' => 'Team', 'location' => 'Location', 'work_type' => 'Work type',
+         'salary' => 'Salary', 'reports_to' => 'Reports to'];
+
+$jobs = mysqli_fetch_all(mysqli_query($conn, 'SELECT * FROM jobs ORDER BY job_ref'), MYSQLI_ASSOC);
+
+$resps = [];
+foreach (mysqli_query($conn, 'SELECT job_ref, description FROM job_responsibilities ORDER BY job_ref, sort_order') as $r) {
+    $resps[$r['job_ref']][] = $r['description'];
+}
+
+$reqs = [];
+foreach (mysqli_query($conn, 'SELECT job_ref, type, description FROM job_requirements ORDER BY job_ref, type, sort_order') as $r) {
+    $reqs[$r['job_ref']][$r['type']][] = $r['description'];
+}
+
+$perks = array_column(mysqli_fetch_all(mysqli_query($conn, 'SELECT description FROM perks ORDER BY sort_order'), MYSQLI_ASSOC), 'description');
+
+// Show "All roles close on" only when every job shares one date.
+$dates = array_unique(array_column($jobs, 'closing_date'));
+$close = count($dates) === 1 ? reset($dates) : null;
+
 include 'header.inc';
 ?>
 
   <main id="main-content">
     <h1>Open positions</h1>
-    <p class="lead">SwinEduTech builds digital learning tools and inclusive online education platforms for schools and TAFEs across Australia. We have three roles open in our engineering and design teams. Each one helps our platform work for every learner, including people who use screen readers, keyboards or slow internet.</p>
+    <p class="lead">SwinEduTech builds digital learning tools and inclusive online education platforms for schools and TAFEs across Australia. We have <?= count($jobs) ?> roles open in our engineering and design teams. Each one helps our platform work for every learner, including people who use screen readers, keyboards or slow internet.</p>
 
     <!-- Aside -->
     <aside aria-labelledby="perks-heading">
       <h2 id="perks-heading">Working at SwinEduTech</h2>
       <ul>
-        <li>Hybrid work with 3 days from home</li>
-        <li>$1,500 yearly learning budget</li>
-        <li>5 extra days of leave</li>
-        <li>Paid accessibility training</li>
+<?php foreach ($perks as $perk): ?>
+        <li><?= h($perk) ?></li>
+<?php endforeach; ?>
       </ul>
+<?php if ($close): ?>
       <!-- Inline CSS -->
-      <p style="font-weight: 700;">All roles close on <time datetime="2026-11-30">30 November 2026</time>.</p>
+      <p style="font-weight: 700;">All roles close on <time datetime="<?= h($close) ?>"><?= date('j F Y', strtotime($close)) ?></time>.</p>
+<?php endif; ?>
       <h3>Need an adjustment</h3>
       <p>We can give you this ad in another format or change how the interview runs. Email <a href="mailto:SWD00450@swin.edu.au">SWD00450@swin.edu.au</a>.</p>
     </aside>
 
-    <!-- Job 1: Front-End Developer -->
-    <section class="job" id="fe001" aria-labelledby="job1-title">
-      <h2 id="job1-title">Front-End Developer</h2>
+<?php foreach ($jobs as $i => $job):
+      $ref = h($job['job_ref']);
+      $title_id = 'job' . ($i + 1) . '-title'; ?>
+    <section class="job" id="<?= strtolower($ref) ?>" aria-labelledby="<?= $title_id ?>">
+      <h2 id="<?= $title_id ?>"><?= h($job['title']) ?></h2>
       <dl class="job-meta">
         <div>
           <dt>Reference</dt>
-          <dd class="ref-no">FE001</dd>
+          <dd class="ref-no"><?= $ref ?></dd>
         </div>
+<?php foreach ($meta as $col => $label): ?>
         <div>
-          <dt>Team</dt>
-          <dd>Engineering</dd>
+          <dt><?= $label ?></dt>
+          <dd><?= h($job[$col]) ?></dd>
         </div>
-        <div>
-          <dt>Location</dt>
-          <dd>Melbourne (Hawthorn), hybrid</dd>
-        </div>
-        <div>
-          <dt>Work type</dt>
-          <dd>Full-time, permanent</dd>
-        </div>
-        <div>
-          <dt>Salary</dt>
-          <dd>$95,000 to $120,000 a year plus super</dd>
-        </div>
-        <div>
-          <dt>Reports to</dt>
-          <dd>Lead Front-End Engineer</dd>
-        </div>
+<?php endforeach; ?>
       </dl>
-      <p>You will build the student and teacher pages of our learning platform and keep them fast and accessible to WCAG 2.2 AA. In your first three months you will learn our component library, fix accessibility bugs on the quiz pages and ship your first feature with a senior developer.</p>
+      <p><?= h($job['summary']) ?></p>
 
       <section>
         <h3>Key responsibilities</h3>
         <ol>
-          <li>Build page layouts and components with HTML, CSS and JavaScript.</li>
-          <li>Test pages with screen readers and keyboard only navigation.</li>
-          <li>Fix bugs reported by teachers and students.</li>
-          <li>Review code from other developers.</li>
-          <li>Turn designer mock-ups into working pages.</li>
+<?php foreach ($resps[$job['job_ref']] ?? [] as $item): ?>
+          <li><?= h($item) ?></li>
+<?php endforeach; ?>
         </ol>
       </section>
 
       <section>
         <h3>Requirements</h3>
         <div class="req-cols">
+<?php foreach (['essential' => 'Essential', 'preferable' => 'Preferable'] as $type => $label): ?>
           <div>
-            <h4>Essential</h4>
+            <h4><?= $label ?></h4>
             <ul>
-              <li>2 or more years building websites with HTML, CSS and JavaScript</li>
-              <li>Good understanding of semantic HTML and WCAG</li>
-              <li>Experience using Git in a team</li>
-              <li>Right to work in Australia</li>
+<?php foreach ($reqs[$job['job_ref']][$type] ?? [] as $item): ?>
+              <li><?= h($item) ?></li>
+<?php endforeach; ?>
             </ul>
           </div>
-          <div>
-            <h4>Preferable</h4>
-            <ul>
-              <li>Experience with React or Vue</li>
-              <li>Worked on a learning management system before</li>
-            </ul>
-          </div>
+<?php endforeach; ?>
         </div>
       </section>
 
-      <a class="btn" href="apply.php">Apply now (reference FE001)</a>
+      <a class="btn" href="apply.php">Apply now (reference <?= $ref ?>)</a>
     </section>
-
-    <!-- Job 2: Full-Stack Developer -->
-    <section class="job" id="fs002" aria-labelledby="job2-title">
-      <h2 id="job2-title">Full-Stack Developer</h2>
-      <dl class="job-meta">
-        <div>
-          <dt>Reference</dt>
-          <dd class="ref-no">FS002</dd>
-        </div>
-        <div>
-          <dt>Team</dt>
-          <dd>Engineering</dd>
-        </div>
-        <div>
-          <dt>Location</dt>
-          <dd>Remote, Australia</dd>
-        </div>
-        <div>
-          <dt>Work type</dt>
-          <dd>Full-time, permanent</dd>
-        </div>
-        <div>
-          <dt>Salary</dt>
-          <dd>$100,000 to $125,000 a year plus super</dd>
-        </div>
-        <div>
-          <dt>Reports to</dt>
-          <dd>Engineering Manager</dd>
-        </div>
-      </dl>
-      <p>You will build features across the whole platform, from the teacher dashboard to the services behind it. Student data is at the centre of this role, so you will help keep it secure and private while the platform grows.</p>
-
-      <section>
-        <h3>Key responsibilities</h3>
-        <ol>
-          <li>Build features end to end with Node.js, PostgreSQL and our front-end components.</li>
-          <li>Design and maintain the APIs used by our web and mobile apps.</li>
-          <li>Protect student data with secure coding and careful access control.</li>
-          <li>Write automated tests and review pull requests.</li>
-        </ol>
-      </section>
-
-      <section>
-        <h3>Requirements</h3>
-        <div class="req-cols">
-          <div>
-            <h4>Essential</h4>
-            <ul>
-              <li>3 or more years of full-stack web development</li>
-              <li>Experience with Node.js or a similar back-end language, and SQL</li>
-              <li>Working knowledge of the OWASP Top 10 security risks</li>
-              <li>Right to work in Australia</li>
-            </ul>
-          </div>
-          <div>
-            <h4>Preferable</h4>
-            <ul>
-              <li>Knowledge of the Australian Privacy Principles</li>
-              <li>Experience deploying to a cloud platform such as AWS</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <a class="btn" href="apply.php">Apply now (reference FS002)</a>
-    </section>
-
-    <!-- Job 3: UI/UX Designer -->
-    <section class="job" id="ux003" aria-labelledby="job3-title">
-      <h2 id="job3-title">UI/UX Designer</h2>
-      <dl class="job-meta">
-        <div>
-          <dt>Reference</dt>
-          <dd class="ref-no">UX003</dd>
-        </div>
-        <div>
-          <dt>Team</dt>
-          <dd>Design</dd>
-        </div>
-        <div>
-          <dt>Location</dt>
-          <dd>Melbourne (Hawthorn), hybrid</dd>
-        </div>
-        <div>
-          <dt>Work type</dt>
-          <dd>Part-time, 3 days a week</dd>
-        </div>
-        <div>
-          <dt>Salary</dt>
-          <dd>$90,000 to $115,000 a year pro rata plus super</dd>
-        </div>
-        <div>
-          <dt>Reports to</dt>
-          <dd>Head of Product Design</dd>
-        </div>
-      </dl>
-      <p>You will design new features for our online classroom app. You will talk with teachers and students to find out what they need, then design screens that are clear and inclusive. Your first project is a redesign of the assignment upload screen, which students told us is confusing on phones.</p>
-
-      <section>
-        <h3>Key responsibilities</h3>
-        <ol>
-          <li>Run interviews and user tests with teachers and students.</li>
-          <li>Create wireframes, prototypes and final designs in Figma.</li>
-          <li>Check colour contrast and text size in every design.</li>
-          <li>Keep our design system up to date.</li>
-        </ol>
-      </section>
-
-      <section>
-        <h3>Requirements</h3>
-        <div class="req-cols">
-          <div>
-            <h4>Essential</h4>
-            <ul>
-              <li>A portfolio showing web or app design work</li>
-              <li>Strong skills in Figma</li>
-              <li>Knowledge of accessible design</li>
-              <li>Basic HTML and CSS, so you can work closely with developers</li>
-              <li>Right to work in Australia</li>
-            </ul>
-          </div>
-          <div>
-            <h4>Preferable</h4>
-            <ul>
-              <li>Background in teaching or education</li>
-              <li>Experience testing designs with screen readers</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <a class="btn" href="apply.php">Apply now (reference UX003)</a>
-    </section>
+<?php endforeach; ?>
 
     <!-- Inclusive employment -->
     <section class="inclusion" aria-labelledby="inclusion-heading">
