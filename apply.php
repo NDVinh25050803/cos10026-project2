@@ -31,7 +31,7 @@ include 'header.inc';
           <div class="form-group">
             <label for="job-ref">Job reference number <span class="req" aria-hidden="true">*</span></label>
             <input type="text" id="job-ref" name="job_ref" aria-describedby="ref-hint" list="job-refs">
-            <p class="hint" id="ref-hint">Exactly 5 letters or numbers, e.g. FE001</p>
+            <p class="hint" id="ref-hint">Exactly 5 letters or numbers matching a job on the Job Descriptions page, e.g. FE001</p>
             <datalist id="job-refs">
               <option value="FE001">Front-End Developer</option>
               <option value="FS002">Full-Stack Developer</option>
@@ -44,17 +44,18 @@ include 'header.inc';
           <legend>Personal details</legend>
           <div class="form-group">
             <label for="first-name">First name <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="first-name" name="first_name" autocomplete="given-name">
+            <input type="text" id="first-name" name="first_name" aria-describedby="fname-hint" autocomplete="given-name">
+            <p class="hint" id="fname-hint">Letters only, maximum 20 characters</p>
           </div>
           <div class="form-group">
             <label for="last-name">Last name <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="last-name" name="last_name" autocomplete="family-name">
+            <input type="text" id="last-name" name="last_name" aria-describedby="lname-hint" autocomplete="family-name">
+            <p class="hint" id="lname-hint">Letters only, maximum 20 characters</p>
           </div>
           <div class="form-group">
             <label for="dob">Date of birth <span class="req" aria-hidden="true">*</span></label>
-            <!-- Real dates only, years 1900 to 2010 -->
             <input type="text" id="dob" name="dob" aria-describedby="dob-hint" autocomplete="bday">
-            <p class="hint" id="dob-hint">dd/mm/yyyy, e.g. 27/03/2001</p>
+            <p class="hint" id="dob-hint">dd/mm/yyyy, real date, applicant aged 15 to 80</p>
           </div>
           <fieldset class="choices">
             <legend>Gender <span class="req" aria-hidden="true">*</span></legend>
@@ -69,11 +70,13 @@ include 'header.inc';
           <legend>Address</legend>
           <div class="form-group wide">
             <label for="street">Street address <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="street" name="street_address" autocomplete="address-line1">
+            <input type="text" id="street" name="street_address" aria-describedby="street-hint" autocomplete="address-line1">
+            <p class="hint" id="street-hint">Maximum 40 characters</p>
           </div>
           <div class="form-group">
             <label for="suburb">Suburb / town <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="suburb" name="suburb" autocomplete="address-level2">
+            <input type="text" id="suburb" name="suburb" aria-describedby="suburb-hint" autocomplete="address-level2">
+            <p class="hint" id="suburb-hint">Maximum 40 characters</p>
           </div>
           <div class="form-group">
             <label for="state">State <span class="req" aria-hidden="true">*</span></label>
@@ -91,7 +94,8 @@ include 'header.inc';
           </div>
           <div class="form-group">
             <label for="postcode">Postcode <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="postcode" name="postcode" inputmode="numeric" autocomplete="postal-code">
+            <input type="text" id="postcode" name="postcode" aria-describedby="postcode-hint" inputmode="numeric" autocomplete="postal-code">
+            <p class="hint" id="postcode-hint">4 digits matching state (VIC 3/8, NSW 1/2, QLD 4/9, NT 0, WA 6, SA 5, TAS 7, ACT 0/2)</p>
           </div>
         </fieldset>
 
@@ -121,7 +125,8 @@ include 'header.inc';
           <div class="form-group wide">
             <!-- Inline CSS -->
             <label for="other-skills">Other skills <span style="font-weight: 400; color: #4f5878;">(optional)</span></label>
-            <textarea id="other-skills" name="other_skills" rows="4"></textarea>
+            <textarea id="other-skills" name="other_skills" aria-describedby="other-skills-hint" rows="4"></textarea>
+            <p class="hint" id="other-skills-hint">Optional, maximum 500 characters</p>
           </div>
         </fieldset>
 
