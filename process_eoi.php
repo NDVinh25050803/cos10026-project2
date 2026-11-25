@@ -7,9 +7,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['job_ref'])) {
 
 require_once 'db_connect.php';
 
-function clean_input(string $value): string
+function clean_raw(string $value): string
 {
-    return htmlspecialchars(stripslashes(trim($value)), ENT_QUOTES, 'UTF-8');
+    return stripslashes(trim($value));
+}
+
+function escape_html(string $value, bool $double_encode = true): string
+{
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', $double_encode);
 }
 
 function parse_au_dob_and_age(string $dob_raw): ?array
@@ -80,19 +85,19 @@ function job_ref_exists_in_jobs_table(mysqli $conn, string $job_ref, array &$err
     return $exists;
 }
 
-$job_ref_raw        = trim($_POST['job_ref'] ?? '');
-$first_name_raw     = trim($_POST['first_name'] ?? '');
-$last_name_raw      = trim($_POST['last_name'] ?? '');
-$dob_raw            = trim($_POST['dob'] ?? '');
-$gender_raw         = trim($_POST['gender'] ?? '');
-$street_address_raw = trim($_POST['street_address'] ?? '');
-$suburb_raw         = trim($_POST['suburb'] ?? '');
-$state_raw          = trim($_POST['state'] ?? '');
-$postcode_raw       = trim($_POST['postcode'] ?? '');
-$email_raw          = trim($_POST['email'] ?? '');
-$phone_raw          = trim($_POST['phone'] ?? '');
+$job_ref_raw        = clean_raw($_POST['job_ref'] ?? '');
+$first_name_raw     = clean_raw($_POST['first_name'] ?? '');
+$last_name_raw      = clean_raw($_POST['last_name'] ?? '');
+$dob_raw            = clean_raw($_POST['dob'] ?? '');
+$gender_raw         = clean_raw($_POST['gender'] ?? '');
+$street_address_raw = clean_raw($_POST['street_address'] ?? '');
+$suburb_raw         = clean_raw($_POST['suburb'] ?? '');
+$state_raw          = clean_raw($_POST['state'] ?? '');
+$postcode_raw       = clean_raw($_POST['postcode'] ?? '');
+$email_raw          = clean_raw($_POST['email'] ?? '');
+$phone_raw          = clean_raw($_POST['phone'] ?? '');
 $skills_raw         = $_POST['skills'] ?? [];
-$other_skills_raw   = trim($_POST['other_skills'] ?? '');
+$other_skills_raw   = clean_raw($_POST['other_skills'] ?? '');
 
 $errors = [];
 
@@ -187,17 +192,17 @@ if ($other_skills_raw !== '' && mb_strlen($other_skills_raw) > 500) {
     $errors[] = 'Other skills must be 500 characters or fewer.';
 }
 
-$job_ref        = clean_input($job_ref_raw);
-$first_name     = clean_input($first_name_raw);
-$last_name      = clean_input($last_name_raw);
-$gender         = clean_input($gender_raw);
-$street_address = clean_input($street_address_raw);
-$suburb         = clean_input($suburb_raw);
-$state          = clean_input($state_raw);
-$postcode       = clean_input($postcode_raw);
-$email          = clean_input($email_raw);
-$phone          = clean_input($phone_raw);
-$other_skills   = clean_input($other_skills_raw);
+$job_ref        = escape_html($job_ref_raw);
+$first_name     = escape_html($first_name_raw);
+$last_name      = escape_html($last_name_raw);
+$gender         = escape_html($gender_raw);
+$street_address = escape_html($street_address_raw);
+$suburb         = escape_html($suburb_raw);
+$state          = escape_html($state_raw);
+$postcode       = escape_html($postcode_raw);
+$email          = escape_html($email_raw);
+$phone          = escape_html($phone_raw);
+$other_skills   = escape_html($other_skills_raw);
 
 $skill1 = in_array('html_css', $selected_skills, true) ? 'HTML5 and CSS3' : '';
 $skill2 = in_array('javascript', $selected_skills, true) ? 'JavaScript' : '';
@@ -293,7 +298,7 @@ include 'header.inc';
       <p><a class="btn" href="apply.php">Back to application form</a></p>
     <?php else: ?>
       <h1>Application received</h1>
-      <p>Thank you, <strong><?php echo $first_name . ' ' . $last_name; ?></strong>. Your Expression of Interest has been recorded.</p>
+      <p>Thank you, <strong><?php echo escape_html($first_name, false) . ' ' . escape_html($last_name, false); ?></strong>. Your Expression of Interest has been recorded.</p>
       <p>Your EOI reference number is: <strong>#<?php echo (int) $eoi_number; ?></strong> (Status: <strong>New</strong>).</p>
       <p><a class="btn" href="apply.php">Submit another application</a></p>
     <?php endif; ?>
