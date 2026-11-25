@@ -36,6 +36,24 @@ include 'header.inc';
     <h1>Open positions</h1>
     <p class="lead">SwinEduTech builds digital learning tools and inclusive online education platforms for schools and TAFEs across Australia. We have <?= count($jobs) ?> roles open in our engineering and design teams. Each one helps our platform work for every learner, including people who use screen readers, keyboards or slow internet.</p>
 
+    <!-- Search box -->
+    <section class="search-container" aria-labelledby="search-heading">
+      <h2 id="search-heading">Search jobs</h2>
+      <form action="search.php" method="get" role="search">
+        <label for="keyword">Keyword</label>
+        <p class="hint" id="search-hint">Type a job title or skill, then press Search.</p>
+        <div class="search-row">
+          <input type="search" id="keyword" name="keyword" placeholder="e.g. designer" list="search-suggestions" aria-describedby="search-hint">
+          <button type="submit" class="btn">Search</button>
+        </div>
+        <datalist id="search-suggestions">
+<?php foreach ($jobs as $job): ?>
+          <option value="<?= h($job['title']) ?>"></option>
+<?php endforeach; ?>
+        </datalist>
+      </form>
+    </section>
+
     <!-- Aside -->
     <aside aria-labelledby="perks-heading">
       <h2 id="perks-heading">Working at SwinEduTech</h2>
