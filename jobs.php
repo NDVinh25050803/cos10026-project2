@@ -13,7 +13,7 @@ $jobs = attach_job_lists($conn, mysqli_fetch_all(mysqli_query($conn, 'SELECT * F
 
 $perks = array_column(mysqli_fetch_all(mysqli_query($conn, 'SELECT description FROM perks ORDER BY sort_order'), MYSQLI_ASSOC), 'description');
 
-// Show "All roles close on" only when every job shares one date.
+// Show the closing line only when every job shares one date.
 $dates = array_unique(array_column($jobs, 'closing_date'));
 $close = count($dates) === 1 ? reset($dates) : null;
 
@@ -36,7 +36,11 @@ include 'header.inc';
       </ul>
 <?php if ($close): ?>
       <!-- Inline CSS -->
+<?php if (job_is_closed($close)): ?>
+      <p style="font-weight: 700;">Applications closed.</p>
+<?php else: ?>
       <p style="font-weight: 700;">All roles close on <time datetime="<?= h($close) ?>"><?= date('j F Y', strtotime($close)) ?></time>.</p>
+<?php endif; ?>
 <?php endif; ?>
       <h3>Need an adjustment</h3>
       <p>We can give you this ad in another format or change how the interview runs. Email <a href="mailto:SWD00450@swin.edu.au">SWD00450@swin.edu.au</a>.</p>

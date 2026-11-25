@@ -15,9 +15,18 @@ $job_card_style = <<<'CSS'
       letter-spacing: 1px;
       transform: rotate(-2deg);
     }
+    .job .closed {
+      color: var(--red);
+      font-weight: 700;
+    }
 CSS;
 
 function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
+
+// Open until the end of the closing day, Melbourne time.
+function job_is_closed($closing_date) {
+    return $closing_date < (new DateTime('now', new DateTimeZone('Australia/Melbourne')))->format('Y-m-d');
+}
 
 // Adds 'resps' and 'reqs' lists to each job row from the child tables.
 function attach_job_lists($conn, $jobs) {
@@ -84,7 +93,11 @@ function render_job($job, $n) {
         </div>
       </section>
 
+<?php if (job_is_closed($job['closing_date'])): ?>
+      <p class="closed">Applications closed</p>
+<?php else: ?>
       <a class="btn" href="apply.php?ref=<?= urlencode($job['job_ref']) ?>">Apply now (reference <?= $ref ?>)</a>
+<?php endif; ?>
     </section>
 <?php
 }

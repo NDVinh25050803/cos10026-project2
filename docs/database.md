@@ -99,7 +99,7 @@ One row per application sent from `apply.php`. Indexes: `job_ref`, and `(last_na
 | salary | VARCHAR(100) | Shown as text, e.g. "$95,000 to $120,000 a year plus super" |
 | reports_to | VARCHAR(100) | |
 | summary | TEXT | Paragraph under the job details |
-| closing_date | DATE | |
+| closing_date | DATE | Last day to apply. After it the job shows "Applications closed" |
 
 ### job_responsibilities
 

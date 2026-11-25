@@ -1,5 +1,6 @@
 -- Job tables and the three Part 1 jobs. Author: Nguyen Dang Vinh.
 -- Re-running this file resets all job data.
+-- Closing dates are later than Part 1 (30 Nov) so the jobs stay open for the demo.
 SET NAMES utf8mb4;
 DROP TABLE IF EXISTS job_responsibilities;
 DROP TABLE IF EXISTS job_requirements;
@@ -54,15 +55,15 @@ INSERT INTO jobs (job_ref, title, team, location, work_type, salary, reports_to,
 ('FE001', 'Front-End Developer', 'Engineering', 'Melbourne (Hawthorn), hybrid', 'Full-time, permanent',
  '$95,000 to $120,000 a year plus super', 'Lead Front-End Engineer',
  'You will build the student and teacher pages of our learning platform and keep them fast and accessible to WCAG 2.2 AA. In your first three months you will learn our component library, fix accessibility bugs on the quiz pages and ship your first feature with a senior developer.',
- '2026-11-30'),
+ '2026-12-31'),
 ('FS002', 'Full-Stack Developer', 'Engineering', 'Remote, Australia', 'Full-time, permanent',
  '$100,000 to $125,000 a year plus super', 'Engineering Manager',
  'You will build features across the whole platform, from the teacher dashboard to the services behind it. Student data is at the centre of this role, so you will help keep it secure and private while the platform grows.',
- '2026-11-30'),
+ '2026-12-31'),
 ('UX003', 'UI/UX Designer', 'Design', 'Melbourne (Hawthorn), hybrid', 'Part-time, 3 days a week',
  '$90,000 to $115,000 a year pro rata plus super', 'Head of Product Design',
  'You will design new features for our online classroom app. You will talk with teachers and students to find out what they need, then design screens that are clear and inclusive. Your first project is a redesign of the assignment upload screen, which students told us is confusing on phones.',
- '2026-11-30');
+ '2026-12-31');
 
 INSERT INTO job_responsibilities (job_ref, sort_order, description) VALUES
 ('FE001', 1, 'Build page layouts and components with HTML, CSS and JavaScript.'),
