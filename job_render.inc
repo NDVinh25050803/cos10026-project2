@@ -123,7 +123,7 @@ function render_search_form($conn, $values = []) {
       <h2 id="search-heading">Search jobs</h2>
       <form action="search.php" method="get" role="search">
         <label for="keyword">Keyword</label>
-        <p class="hint" id="search-hint">Type a job title or skill. Pick filters to narrow the list.</p>
+        <p class="hint" id="search-hint">Type a job title, team or place. Pick filters to narrow the list.</p>
         <div class="search-row">
           <input type="search" id="keyword" name="keyword" value="<?= h($values['keyword'] ?? '') ?>" placeholder="e.g. designer" list="search-suggestions" aria-describedby="search-hint">
         </div>

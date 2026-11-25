@@ -16,13 +16,14 @@ $perks = array_column(mysqli_fetch_all(mysqli_query($conn, 'SELECT description F
 // Show the closing line only when every job shares one date.
 $dates = array_unique(array_column($jobs, 'closing_date'));
 $close = count($dates) === 1 ? reset($dates) : null;
+$open = count(array_filter($jobs, fn($j) => !job_is_closed($j['closing_date'])));
 
 include 'header.inc';
 ?>
 
   <main id="main-content">
     <h1>Open positions</h1>
-    <p class="lead">SwinEduTech builds digital learning tools and inclusive online education platforms for schools and TAFEs across Australia. We have <?= count($jobs) ?> <?= count($jobs) === 1 ? 'role' : 'roles' ?> open in our engineering and design teams. Each one helps our platform work for every learner, including people who use screen readers, keyboards or slow internet.</p>
+    <p class="lead">SwinEduTech builds digital learning tools and inclusive online education platforms for schools and TAFEs across Australia. We have <?= $open ?> <?= $open === 1 ? 'role' : 'roles' ?> open in our engineering and design teams. Each one helps our platform work for every learner, including people who use screen readers, keyboards or slow internet.</p>
 
 <?php render_search_form($conn); ?>
 
