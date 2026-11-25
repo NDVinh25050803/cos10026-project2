@@ -111,7 +111,7 @@ include 'header.inc';
         </div>
       </section>
 
-      <a class="btn" href="apply.php">Apply now (reference <?= $ref ?>)</a>
+      <a class="btn" href="apply.php?ref=<?= urlencode($job['job_ref']) ?>">Apply now (reference <?= $ref ?>)</a>
     </section>
 <?php endforeach; ?>
 
