@@ -292,13 +292,14 @@ $body_id = 'process-eoi-page';
 include 'header.inc';
 ?>
 
-  <main id="main-content">
+ <main id="main-content">
     <?php if (!empty($errors)): ?>
-      <h1>Please check your application</h1>
-      <p>Your application could not be submitted due to the following issues:</p>
+      <h1>Application Not Submitted</h1>
+      <h2>Please review and fix the following issues:</h2>
+      <p>We found <?php echo count($errors); ?> issue(s) with your submission. Every problem is listed below:</p>
       <ul>
         <?php foreach ($errors as $err): ?>
-          <li><?php echo $err; ?></li>
+          <li><?php echo escape_html((string) $err, false); ?></li>
         <?php endforeach; ?>
       </ul>
       <p><a class="btn" href="apply.php">Back to application form</a></p>
