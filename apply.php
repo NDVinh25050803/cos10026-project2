@@ -23,14 +23,14 @@ include 'header.inc';
     <p>Fields marked with <span class="req">*</span> are required. Find the reference number on the <a href="jobs.php">Job Descriptions</a> page.</p>
 
     <div class="apply-form-container">
-      <!-- Application form -->
-      <form action="https://mercury.swin.edu.au/it000000/formtest.php" method="post">
+      <!-- Application form: client-side validation disabled so server-side validation runs in process_eoi.php -->
+      <form action="process_eoi.php" method="post" novalidate>
 
         <fieldset>
           <legend>The job</legend>
           <div class="form-group">
             <label for="job-ref">Job reference number <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="job-ref" name="job_ref" required maxlength="5" pattern="[A-Za-z0-9]{5}" title="Exactly 5 letters or numbers, e.g. FE001" aria-describedby="ref-hint" list="job-refs">
+            <input type="text" id="job-ref" name="job_ref" aria-describedby="ref-hint" list="job-refs">
             <p class="hint" id="ref-hint">Exactly 5 letters or numbers, e.g. FE001</p>
             <datalist id="job-refs">
               <option value="FE001">Front-End Developer</option>
@@ -44,21 +44,21 @@ include 'header.inc';
           <legend>Personal details</legend>
           <div class="form-group">
             <label for="first-name">First name <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="first-name" name="first_name" required maxlength="20" pattern="[A-Za-z]{1,20}" title="Letters only, up to 20" autocomplete="given-name">
+            <input type="text" id="first-name" name="first_name" autocomplete="given-name">
           </div>
           <div class="form-group">
             <label for="last-name">Last name <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="last-name" name="last_name" required maxlength="20" pattern="[A-Za-z]{1,20}" title="Letters only, up to 20" autocomplete="family-name">
+            <input type="text" id="last-name" name="last_name" autocomplete="family-name">
           </div>
           <div class="form-group">
             <label for="dob">Date of birth <span class="req" aria-hidden="true">*</span></label>
             <!-- Real dates only, years 1900 to 2010 -->
-            <input type="text" id="dob" name="dob" required maxlength="10" pattern="((0[1-9]|1\d|2[0-8])/(0[1-9]|1[0-2])|(29|30)/(0[13-9]|1[0-2])|31/(0[13578]|1[02]))/(19\d{2}|200\d|2010)|29/02/(19(0[48]|[2468][048]|[13579][26])|200[048])" title="A real date as dd/mm/yyyy between 1900 and 2010, e.g. 27/03/2001" aria-describedby="dob-hint" autocomplete="bday">
+            <input type="text" id="dob" name="dob" aria-describedby="dob-hint" autocomplete="bday">
             <p class="hint" id="dob-hint">dd/mm/yyyy, e.g. 27/03/2001</p>
           </div>
           <fieldset class="choices">
             <legend>Gender <span class="req" aria-hidden="true">*</span></legend>
-            <label><input type="radio" name="gender" value="female" required> Female</label>
+            <label><input type="radio" name="gender" value="female"> Female</label>
             <label><input type="radio" name="gender" value="male"> Male</label>
             <label><input type="radio" name="gender" value="other"> Other</label>
             <label><input type="radio" name="gender" value="not_say"> Prefer not to say</label>
@@ -69,15 +69,15 @@ include 'header.inc';
           <legend>Address</legend>
           <div class="form-group wide">
             <label for="street">Street address <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="street" name="street_address" required maxlength="40" autocomplete="address-line1">
+            <input type="text" id="street" name="street_address" autocomplete="address-line1">
           </div>
           <div class="form-group">
             <label for="suburb">Suburb / town <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="suburb" name="suburb" required maxlength="40" autocomplete="address-level2">
+            <input type="text" id="suburb" name="suburb" autocomplete="address-level2">
           </div>
           <div class="form-group">
             <label for="state">State <span class="req" aria-hidden="true">*</span></label>
-            <select id="state" name="state" required autocomplete="address-level1">
+            <select id="state" name="state" autocomplete="address-level1">
               <option value="">Please select</option>
               <option value="VIC">VIC</option>
               <option value="NSW">NSW</option>
@@ -91,7 +91,7 @@ include 'header.inc';
           </div>
           <div class="form-group">
             <label for="postcode">Postcode <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="postcode" name="postcode" required maxlength="4" pattern="\d{4}" title="Exactly 4 digits" inputmode="numeric" autocomplete="postal-code">
+            <input type="text" id="postcode" name="postcode" inputmode="numeric" autocomplete="postal-code">
           </div>
         </fieldset>
 
@@ -99,11 +99,11 @@ include 'header.inc';
           <legend>Contact</legend>
           <div class="form-group">
             <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
-            <input type="email" id="email" name="email" required autocomplete="email">
+            <input type="email" id="email" name="email" autocomplete="email">
           </div>
           <div class="form-group">
             <label for="phone">Phone number <span class="req" aria-hidden="true">*</span></label>
-            <input type="tel" id="phone" name="phone" required maxlength="12" pattern="\d{8,12}" title="8 to 12 digits, no spaces" aria-describedby="phone-hint" autocomplete="tel">
+            <input type="tel" id="phone" name="phone" aria-describedby="phone-hint" autocomplete="tel">
             <p class="hint" id="phone-hint">8 to 12 digits, no spaces</p>
           </div>
         </fieldset>
@@ -113,7 +113,7 @@ include 'header.inc';
           <fieldset class="choices" aria-describedby="skills-hint">
             <legend>Select your skills <span class="req" aria-hidden="true">*</span></legend>
             <p class="hint" id="skills-hint">HTML5 and CSS3 must be ticked. Tick any other skills you have.</p>
-            <label><input type="checkbox" name="skills[]" value="html_css" required> HTML5 and CSS3 (required for all roles)</label>
+            <label><input type="checkbox" name="skills[]" value="html_css"> HTML5 and CSS3 (required for all roles)</label>
             <label><input type="checkbox" name="skills[]" value="javascript"> JavaScript</label>
             <label><input type="checkbox" name="skills[]" value="ui_ux"> UI/UX design</label>
             <label><input type="checkbox" name="skills[]" value="python"> Python</label>
