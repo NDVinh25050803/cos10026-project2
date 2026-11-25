@@ -11,3 +11,13 @@ try {
     http_response_code(500);
     exit('<p>Sorry, we can\'t reach the database right now. Please try again later.</p>');
 }
+
+// A query that fails later (e.g. a missing table): log it and show a plain
+// message instead of PHP's error with file paths and a stack trace.
+set_exception_handler(function ($e) {
+    error_log('Uncaught: ' . $e);
+    if (!headers_sent()) {
+        http_response_code(500);
+    }
+    exit('<p>Sorry, something went wrong. Please try again later.</p>');
+});

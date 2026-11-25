@@ -19,9 +19,17 @@ $job_card_style = <<<'CSS'
       color: var(--red);
       font-weight: 700;
     }
+    .job .btn + .hint {
+      margin-top: var(--space-md);
+    }
 CSS;
 
 function h($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
+
+// <time> tag showing a DATE column as e.g. "31 December 2026".
+function long_date($date) {
+    return '<time datetime="' . h($date) . '">' . date('j F Y', strtotime($date)) . '</time>';
+}
 
 // Open until the end of the closing day, Melbourne time.
 function job_is_closed($closing_date) {
@@ -94,9 +102,10 @@ function render_job($job, $n) {
       </section>
 
 <?php if (job_is_closed($job['closing_date'])): ?>
-      <p class="closed">Applications closed</p>
+      <p class="closed">Applications closed on <?= long_date($job['closing_date']) ?>.</p>
 <?php else: ?>
       <a class="btn" href="apply.php?ref=<?= urlencode($job['job_ref']) ?>">Apply now (reference <?= $ref ?>)</a>
+      <p class="hint">Applications close on <?= long_date($job['closing_date']) ?>.</p>
 <?php endif; ?>
     </section>
 <?php

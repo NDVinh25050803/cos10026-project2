@@ -47,8 +47,10 @@ include 'header.inc';
 
 <?php render_search_form($conn, $values); ?>
 
-<?php if ($criteria === ''): ?>
-    <p>Showing all <?= count($jobs) ?> jobs.</p>
+<?php if (!$jobs && $criteria === ''): ?>
+    <p>There are no open roles right now. Please check back soon.</p>
+<?php elseif ($criteria === ''): ?>
+    <p>Showing all <?= count($jobs) ?> <?= count($jobs) === 1 ? 'job' : 'jobs' ?>.</p>
 <?php elseif ($jobs): ?>
     <p><?= count($jobs) ?> <?= count($jobs) === 1 ? 'job matches' : 'jobs match' ?> <?= $criteria ?>.</p>
 <?php else: ?>

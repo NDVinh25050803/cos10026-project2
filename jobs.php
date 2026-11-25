@@ -22,7 +22,7 @@ include 'header.inc';
 
   <main id="main-content">
     <h1>Open positions</h1>
-    <p class="lead">SwinEduTech builds digital learning tools and inclusive online education platforms for schools and TAFEs across Australia. We have <?= count($jobs) ?> roles open in our engineering and design teams. Each one helps our platform work for every learner, including people who use screen readers, keyboards or slow internet.</p>
+    <p class="lead">SwinEduTech builds digital learning tools and inclusive online education platforms for schools and TAFEs across Australia. We have <?= count($jobs) ?> <?= count($jobs) === 1 ? 'role' : 'roles' ?> open in our engineering and design teams. Each one helps our platform work for every learner, including people who use screen readers, keyboards or slow internet.</p>
 
 <?php render_search_form($conn); ?>
 
@@ -39,13 +39,16 @@ include 'header.inc';
 <?php if (job_is_closed($close)): ?>
       <p style="font-weight: 700;">Applications closed.</p>
 <?php else: ?>
-      <p style="font-weight: 700;">All roles close on <time datetime="<?= h($close) ?>"><?= date('j F Y', strtotime($close)) ?></time>.</p>
+      <p style="font-weight: 700;">All roles close on <?= long_date($close) ?>.</p>
 <?php endif; ?>
 <?php endif; ?>
       <h3>Need an adjustment</h3>
       <p>We can give you this ad in another format or change how the interview runs. Email <a href="mailto:SWD00450@swin.edu.au">SWD00450@swin.edu.au</a>.</p>
     </aside>
 
+<?php if (!$jobs): ?>
+    <p>There are no open roles right now. Please check back soon.</p>
+<?php endif; ?>
 <?php foreach ($jobs as $i => $job) render_job($job, $i + 1); ?>
 
     <!-- Inclusive employment -->

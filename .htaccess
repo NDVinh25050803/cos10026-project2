@@ -2,3 +2,6 @@
 <FilesMatch "\.(inc|sql|md)$">
   Require all denied
 </FilesMatch>
+
+# Don't list folder contents (e.g. /sql/ or /images/).
+Options -Indexes
