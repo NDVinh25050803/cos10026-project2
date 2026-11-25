@@ -24,7 +24,7 @@ include 'header.inc';
     <h1>Open positions</h1>
     <p class="lead">SwinEduTech builds digital learning tools and inclusive online education platforms for schools and TAFEs across Australia. We have <?= count($jobs) ?> roles open in our engineering and design teams. Each one helps our platform work for every learner, including people who use screen readers, keyboards or slow internet.</p>
 
-<?php render_search_form($jobs); ?>
+<?php render_search_form($conn); ?>
 
     <!-- Aside -->
     <aside aria-labelledby="perks-heading">

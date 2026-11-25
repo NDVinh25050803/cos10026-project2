@@ -102,24 +102,43 @@ function render_job($job, $n) {
 <?php
 }
 
-// Search box that sends ?keyword= to search.php. Suggestions are the job titles.
-function render_search_form($jobs, $keyword = '') {
+// Columns the search form can filter on, with their labels.
+const JOB_FILTERS = ['location' => 'Location', 'work_type' => 'Work type', 'team' => 'Team'];
+
+// Search box for search.php. $values holds the current keyword and filter choices.
+function render_search_form($conn, $values = []) {
+    $titles = mysqli_fetch_all(mysqli_query($conn, 'SELECT title FROM jobs ORDER BY job_ref'), MYSQLI_NUM);
 ?>
     <!-- Search box -->
     <section class="search-container" aria-labelledby="search-heading">
       <h2 id="search-heading">Search jobs</h2>
       <form action="search.php" method="get" role="search">
         <label for="keyword">Keyword</label>
-        <p class="hint" id="search-hint">Type a job title or skill, then press Search.</p>
+        <p class="hint" id="search-hint">Type a job title or skill. Pick filters to narrow the list.</p>
         <div class="search-row">
-          <input type="search" id="keyword" name="keyword" value="<?= h($keyword) ?>" placeholder="e.g. designer" list="search-suggestions" aria-describedby="search-hint">
-          <button type="submit" class="btn">Search</button>
+          <input type="search" id="keyword" name="keyword" value="<?= h($values['keyword'] ?? '') ?>" placeholder="e.g. designer" list="search-suggestions" aria-describedby="search-hint">
         </div>
         <datalist id="search-suggestions">
-<?php foreach ($jobs as $job): ?>
-          <option value="<?= h($job['title']) ?>"></option>
+<?php foreach ($titles as [$title]): ?>
+          <option value="<?= h($title) ?>"></option>
 <?php endforeach; ?>
         </datalist>
+        <div class="search-filters">
+<?php foreach (JOB_FILTERS as $col => $label):
+    // $col comes from JOB_FILTERS, never from the request.
+    $options = mysqli_fetch_all(mysqli_query($conn, "SELECT DISTINCT $col FROM jobs ORDER BY $col"), MYSQLI_NUM); ?>
+          <div>
+            <label for="filter-<?= $col ?>"><?= $label ?></label>
+            <select id="filter-<?= $col ?>" name="<?= $col ?>">
+              <option value="">Any</option>
+<?php foreach ($options as [$opt]): ?>
+              <option value="<?= h($opt) ?>"<?= ($values[$col] ?? '') === $opt ? ' selected' : '' ?>><?= h($opt) ?></option>
+<?php endforeach; ?>
+            </select>
+          </div>
+<?php endforeach; ?>
+          <button type="submit" class="btn">Search</button>
+        </div>
       </form>
     </section>
 <?php

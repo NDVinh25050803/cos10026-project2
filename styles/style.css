@@ -443,7 +443,8 @@ button.btn {
   gap: var(--space-sm);
 }
 
-.search-row input {
+.search-row input,
+.search-filters select {
   flex: 1 1 16rem;
   min-height: 44px;
   padding: 0 var(--space-md);
@@ -452,8 +453,28 @@ button.btn {
   font: inherit;
 }
 
-.search-row input:hover {
+.search-row input:hover,
+.search-filters select:hover {
   border-color: var(--ink);
+}
+
+/* Search filters: Search button ends the row, or fills its own row when it wraps */
+.search-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+  align-items: flex-end;
+  margin-top: var(--space-md);
+}
+
+.search-filters > * {
+  flex: 1 1 10rem;
+}
+
+.search-filters select {
+  width: 100%;
+  background-color: var(--paper);
+  color: var(--ink);
 }
 
 .search-row input::placeholder {
