@@ -1,6 +1,6 @@
 <?php
 // Process job application (EOI) submissions. Author: Nguyen Truong Minh Thuy.
-if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST)) {
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['job_ref'])) {
     header('Location: apply.php');
     exit;
 }
