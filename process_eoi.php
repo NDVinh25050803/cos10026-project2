@@ -237,8 +237,9 @@ if (empty($errors)) {
         KEY idx_eoi_name (last_name, first_name)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
 
-    if (!mysqli_query($conn, $create_sql)) {
-        $errors[] = 'Could not prepare EOI table: ' . escape_html(mysqli_error($conn), false);
+if (!mysqli_query($conn, $create_sql)) {
+        error_log('EOI table creation failed: ' . mysqli_error($conn));
+        $errors[] = 'We could not process your application right now due to a system error. Please try again later.';
     } else {
         $insert_sql = "INSERT INTO eoi (
             job_ref, first_name, last_name, dob, gender,
@@ -249,7 +250,8 @@ if (empty($errors)) {
 
         $stmt = mysqli_prepare($conn, $insert_sql);
         if (!$stmt) {
-            $errors[] = 'Database statement error: ' . escape_html(mysqli_error($conn), false);
+            error_log('EOI prepare failed: ' . mysqli_error($conn));
+            $errors[] = 'We could not process your application right now due to a system error. Please try again later.';
         } else {
             mysqli_stmt_bind_param(
                 $stmt,
@@ -275,13 +277,13 @@ if (empty($errors)) {
             if (mysqli_stmt_execute($stmt)) {
                 $eoi_number = mysqli_insert_id($conn);
             } else {
-                $errors[] = 'Failed to save application: ' . escape_html(mysqli_stmt_error($stmt), false);
+                error_log('EOI insert failed: ' . mysqli_stmt_error($stmt));
+                $errors[] = 'We could not save your application right now due to a system error. Please try again later.';
             }
             mysqli_stmt_close($stmt);
         }
     }
 }
-
 $page_title = empty($errors) ? 'Application Submitted' : 'Application Error';
 $page_description = 'Expression of Interest submission result for SwinEduTech.';
 $page_keywords = 'SwinEduTech, EOI, application status';
@@ -302,8 +304,7 @@ include 'header.inc';
       <p><a class="btn" href="apply.php">Back to application form</a></p>
     <?php else: ?>
       <h1>Application received</h1>
-      <p>Thank you, <strong><?php echo escape_html($first_name, false) . ' ' . escape_html($last_name, false); ?></strong>. Your Expression of Interest has been recorded.</p>
-      <p>Your EOI reference number is: <strong>#<?php echo (int) $eoi_number; ?></strong> (Status: <strong>New</strong>).</p>
+      <p>Thank you, <strong><?php echo escape_html($first_name, false) . ' ' . escape_html($last_name, false); ?></strong>. Your EOInumber is <strong>#<?php echo (int) $eoi_number; ?></strong> (Status: <strong>New</strong>).</p>
       <p><a class="btn" href="apply.php">Submit another application</a></p>
     <?php endif; ?>
   </main>
