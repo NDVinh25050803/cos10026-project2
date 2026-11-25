@@ -8,6 +8,7 @@ Our COS10026 website. It starts from the Part 1 pages.
 project2/
 ├── index.php, jobs.php, apply.php, about.php
 ├── header.inc, nav.inc, footer.inc   shared page parts
+├── job_render.inc   job card HTML for jobs.php and search.php
 ├── settings.php     database settings
 ├── db_connect.php   opens the database connection
 ├── sql/             tables and seed data, one file per table group
