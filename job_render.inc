@@ -115,8 +115,8 @@ function render_job($job, $n) {
 const JOB_FILTERS = ['location' => 'Location', 'work_type' => 'Work type', 'team' => 'Team'];
 
 // Search box for search.php. $values holds the current keyword and filter choices.
+// No datalist: with one, NVDA in Edge only says "Suggestion available" on focus.
 function render_search_form($conn, $values = []) {
-    $titles = mysqli_fetch_all(mysqli_query($conn, 'SELECT title FROM jobs ORDER BY job_ref'), MYSQLI_NUM);
 ?>
     <!-- Search box -->
     <section class="search-container" aria-labelledby="search-heading">
@@ -125,13 +125,8 @@ function render_search_form($conn, $values = []) {
         <label for="keyword">Keyword</label>
         <p class="hint" id="search-hint">Type a job title, team or place. Pick filters to narrow the list.</p>
         <div class="search-row">
-          <input type="search" id="keyword" name="keyword" value="<?= h($values['keyword'] ?? '') ?>" placeholder="e.g. designer" list="search-suggestions" aria-describedby="search-hint">
+          <input type="search" id="keyword" name="keyword" value="<?= h($values['keyword'] ?? '') ?>" placeholder="e.g. designer" aria-describedby="search-hint">
         </div>
-        <datalist id="search-suggestions">
-<?php foreach ($titles as [$title]): ?>
-          <option value="<?= h($title) ?>"></option>
-<?php endforeach; ?>
-        </datalist>
         <div class="search-filters">
 <?php foreach (JOB_FILTERS as $col => $label):
     // $col comes from JOB_FILTERS, never from the request.
