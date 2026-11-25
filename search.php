@@ -38,6 +38,9 @@ mysqli_stmt_bind_param($stmt, str_repeat('s', count($params)), ...$params);
 mysqli_stmt_execute($stmt);
 $jobs = attach_job_lists($conn, mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC));
 $criteria = h(implode('; ', $criteria));
+// Screen readers read the title first, so it carries the result count.
+$n = count($jobs);
+$page_title .= ' - ' . ($n === 0 ? 'no jobs' : ($n === 1 ? '1 job' : "$n jobs")) . ' found';
 
 include 'header.inc';
 ?>
