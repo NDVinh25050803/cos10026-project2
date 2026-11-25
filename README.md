@@ -7,6 +7,7 @@ Our COS10026 website. It starts from the Part 1 pages.
 ```
 project2/
 ├── index.php, jobs.php, apply.php, about.php
+├── search.php       job search results (?keyword=)
 ├── header.inc, nav.inc, footer.inc   shared page parts
 ├── job_render.inc   job card HTML for jobs.php and search.php
 ├── settings.php     database settings

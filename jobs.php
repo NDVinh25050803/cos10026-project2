@@ -5,21 +5,9 @@ $page_description = 'Front-end developer, full-stack developer and UI/UX designe
 $page_keywords = 'SwinEduTech, jobs, front-end developer, full-stack developer, UI/UX designer, EdTech, accessibility, Melbourne';
 $page_author = 'Nguyen Dang Vinh';
 $body_id = 'jobs-page';
-$page_style = <<<'CSS'
-    .job-meta .ref-no {
-      display: inline-block;
-      margin-top: 2px;
-      padding: 0 0.55rem;
-      border: 2px solid var(--red);
-      border-radius: 4px;
-      color: var(--red);
-      font-family: var(--font-mono);
-      letter-spacing: 1px;
-      transform: rotate(-2deg);
-    }
-CSS;
-require_once 'db_connect.php';
 require_once 'job_render.inc';
+$page_style = $job_card_style;
+require_once 'db_connect.php';
 
 $jobs = attach_job_lists($conn, mysqli_fetch_all(mysqli_query($conn, 'SELECT * FROM jobs ORDER BY job_ref'), MYSQLI_ASSOC));
 
@@ -36,23 +24,7 @@ include 'header.inc';
     <h1>Open positions</h1>
     <p class="lead">SwinEduTech builds digital learning tools and inclusive online education platforms for schools and TAFEs across Australia. We have <?= count($jobs) ?> roles open in our engineering and design teams. Each one helps our platform work for every learner, including people who use screen readers, keyboards or slow internet.</p>
 
-    <!-- Search box -->
-    <section class="search-container" aria-labelledby="search-heading">
-      <h2 id="search-heading">Search jobs</h2>
-      <form action="search.php" method="get" role="search">
-        <label for="keyword">Keyword</label>
-        <p class="hint" id="search-hint">Type a job title or skill, then press Search.</p>
-        <div class="search-row">
-          <input type="search" id="keyword" name="keyword" placeholder="e.g. designer" list="search-suggestions" aria-describedby="search-hint">
-          <button type="submit" class="btn">Search</button>
-        </div>
-        <datalist id="search-suggestions">
-<?php foreach ($jobs as $job): ?>
-          <option value="<?= h($job['title']) ?>"></option>
-<?php endforeach; ?>
-        </datalist>
-      </form>
-    </section>
+<?php render_search_form($jobs); ?>
 
     <!-- Aside -->
     <aside aria-labelledby="perks-heading">
